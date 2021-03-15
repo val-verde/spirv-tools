@@ -687,6 +687,7 @@ bool IsDebugVariableWithIntScalarType(ValidationState_t& _,
 }  // anonymous namespace
 
 spv_result_t ValidateExtension(ValidationState_t& _, const Instruction* inst) {
+#ifdef ENABLE_AFTER_kSPV_KHR_workgroup_memory_explicit_layout_PRESENT_IN_SPIRV_HEADERS
   if (_.version() < SPV_SPIRV_VERSION_WORD(1, 4)) {
     std::string extension = GetExtensionString(&(inst->c_inst()));
     if (extension ==
@@ -696,7 +697,7 @@ spv_result_t ValidateExtension(ValidationState_t& _, const Instruction* inst) {
              "requires SPIR-V version 1.4 or later.";
     }
   }
-
+#endif
   return SPV_SUCCESS;
 }
 
